@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TextInput, View, StyleSheet, Button, Modal } from "react-native";
 
-const GoalInput = ({ addGoalHandler, isModalVisible }) => {
+const GoalInput = ({ addGoalHandler, isModalVisible, closeModalHandler }) => {
   const [enteredGoalText, setEnteredGoalText] = useState("");
 
   const goalInputHandler = (enteredText) => {
@@ -16,10 +16,17 @@ const GoalInput = ({ addGoalHandler, isModalVisible }) => {
           placeholder="Your course goal"
           onChangeText={goalInputHandler}
         />
-        <Button
-          title="Add Goal"
-          onPress={() => addGoalHandler(enteredGoalText)}
-        />
+        <View style={styles.buttonWrapper}>
+          <View style={styles.button}>
+            <Button
+              title="Add Goal"
+              onPress={() => addGoalHandler(enteredGoalText)}
+            />
+          </View>
+          <View style={styles.button}>
+            <Button title="Cancel" onPress={closeModalHandler} />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -27,21 +34,29 @@ const GoalInput = ({ addGoalHandler, isModalVisible }) => {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     paddingBottom: 24,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
     flex: 1,
+    padding:16
   },
   TextInput: {
     borderWidth: 1,
     borderColor: "#ccc",
-    width: "80%",
+    width: "100%",
     paddingLeft: 10,
     paddingTop: 5,
     paddingBottom: 5,
+  },
+  buttonWrapper: {
+    flexDirection: "row",
+    gap: 10,
+    marginTop:20
+  },
+  button: {
+    width: "30%",
   },
 });
 
